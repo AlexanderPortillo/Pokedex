@@ -5,9 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass --watch --style=compressed Sass/index.scss Public/bundle.css"
+    "sass": "sass --watch --style=compressed Sass/index.scss Public/bundle.css",
+    "rollup": "rollup --watch --config --sourcemap"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^3.28.1"
+  }
 }

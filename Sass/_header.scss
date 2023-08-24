@@ -12,7 +12,7 @@
 	&__search {
 		width: 80%;
 		height: 70px;
-		display: flex;
+		display: none;
 		flex-direction: row;
 		align-items: center;
 		gap: 1rem;
@@ -23,6 +23,10 @@
 		&:focus-within {
 			border: 2px solid #3964d1;
 		}
+	}
+
+	&--active {
+		display: flex;
 	}
 
 	&__search--icon {

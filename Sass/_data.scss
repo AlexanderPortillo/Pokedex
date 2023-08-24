@@ -1,0 +1,26 @@
+.data {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.8);
+	align-items: center;
+	justify-content: center;
+	display: none;
+
+	&--active {
+		display: flex;
+	}
+
+	&__container {
+	}
+	&__img--pokemon {
+	}
+	&__pokemon {
+	}
+	&__name {
+	}
+	&__close {
+	}
+}

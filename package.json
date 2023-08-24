@@ -1,0 +1,13 @@
+{
+  "name": "tpi-pokedex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch --style=compressed Sass/index.scss Public/bundle.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

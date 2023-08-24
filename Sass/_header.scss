@@ -1,0 +1,46 @@
+.header {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+
+	&__title {
+		font-size: 3rem;
+	}
+
+	&__search {
+		width: 80%;
+		height: 70px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		border: 2px solid #000;
+
+		&:focus-within {
+			border: 2px solid #3964d1;
+		}
+	}
+
+	&__search--icon {
+		font-size: 2rem;
+	}
+
+	&__input--search {
+		width: 100%;
+		padding: 1rem;
+		outline: none;
+		border: none;
+		font-size: 1rem;
+		caret-color: red;
+	}
+
+	&__search--btn {
+		width: 100px;
+		height: 50px;
+		font-size: 1rem;
+	}
+}

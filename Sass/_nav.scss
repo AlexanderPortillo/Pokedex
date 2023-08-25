@@ -33,9 +33,10 @@
 
 	&__li {
 		transition: transform 1s;
+		border-bottom: 1px solid transparent;
 
 		&:hover {
-			border-bottom: 1px solid;
+			border-bottom: 1px solid #306bb1;
 			transform: scale(1.4);
 		}
 	}
@@ -45,7 +46,7 @@
 	}
 
 	&__ol:hover &__li {
-		filter: blur(5px);
+		filter: blur(2px);
 	}
 
 	&__ol &__li:hover {
@@ -53,7 +54,7 @@
 	}
 
 	&__item {
-		color: black;
+		color: #2a6cb4;
 		position: relative;
 	}
 }

@@ -18,10 +18,13 @@
 		gap: 1rem;
 		padding: 1rem;
 		border-radius: 0.5rem;
-		border: 2px solid #000;
+		border: 3px solid #fbca02;
+		box-shadow: 0 0 10px #306bb1;
+		transition: border 1s, box-shadow 1s;
 
 		&:focus-within {
-			border: 2px solid #3964d1;
+			border: 3px solid #306bb1;
+			box-shadow: 0 0 10px #fbca02;
 		}
 	}
 
@@ -31,6 +34,7 @@
 
 	&__search--icon {
 		font-size: 2rem;
+		color: #0c356a;
 	}
 
 	&__input--search {
@@ -38,13 +42,26 @@
 		padding: 1rem;
 		outline: none;
 		border: none;
-		font-size: 1rem;
-		caret-color: red;
+		font-size: 1.2rem;
+		caret-color: #bb2525;
+		color: #0c356a;
+		background-color: transparent;
 	}
 
 	&__search--btn {
 		width: 100px;
 		height: 50px;
-		font-size: 1rem;
+		font-size: 1.2rem;
+		cursor: pointer;
+		background-color: #f0c102;
+		border-radius: 1rem;
+		border: none;
+		color: #0c356a;
+		border: 3px solid #1a6bc1;
+		box-shadow: 1px 1px 1px #0c356a;
+
+		&:active {
+			box-shadow: 1px 1px 1px #0c356a7c;
+		}
 	}
 }

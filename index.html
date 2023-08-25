@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ! Icon -->
-    <link rel="icon" href="">
+    <link rel="icon" href="Img/Pokeball_icon-icons.com_67533.cur">
     <!-- ! Font Awesome -->
     <script src="https://kit.fontawesome.com/627b2b4bd2.js" defer crossorigin="anonymous"></script>
     <!-- ! List style -->
     <link rel="stylesheet" href="Public/bundle.css">
     <!-- ! JavaScript -->
     <script src="Public/bundle.js" defer></script>
-    <title>Pokedex</title>
+    <title>Pokédex</title>
 </head>
 
 <body>
@@ -24,12 +24,12 @@
             </div>
 
             <ol class="nav__ol">
-                <li class="nav__li nav__li--one">
-                    <a href="#" target="_blank" class="nav__item" data-accion="home">Inicio</a>
+                <li class="nav__li nav__li--one nav__li--active">
+                    <a href="#" class="nav__item" data-accion="home">Inicio</a>
                 </li>
 
                 <li class="nav__li nav__li--two">
-                    <a href="https://pokeapi.co/" target="_blank" class="nav__item" data-accion="pokedex">Pokédex</a>
+                    <a href="#" class="nav__item" data-accion="pokedex">Pokédex</a>
                 </li>
 
                 <li class="nav__li">
@@ -37,7 +37,7 @@
                 </li>
 
                 <li class="nav__li">
-                    <a href="https://pokeapi.co/" target="_blank" class="nav__item">Repositorio</a>
+                    <a href="#" target="_blank" class="nav__item">Repositorio</a>
                 </li>
             </ol>
         </div>
@@ -45,20 +45,25 @@
         <div class="header">
             <h1 class="header__title">Pokedex</h1>
 
-            <div class="header__search">
+            <div class="header__search header--active">
                 <div class="header__search--icon">
                     <i class="fas fa-search"></i>
                 </div>
 
-                <input type="search" name="" id="" class="header__input--search"
+                <input type="text" name="" id="" class="header__input--search"
                     placeholder="Busque un pokemon por su nombre o usando su numero de la Pokédex Nacional.">
 
                 <button class="header__search--btn">Buscar</button>
             </div>
         </div>
 
+        <div class="wrapper">
+            <div class="wrapper__pokeball">
+            </div>
+        </div>
+
         <div class="boxes" id="boxes">
-            <div class="box" id="box" data-id="33">
+            <!-- <div class="box" id="box" data-id="">
                 <div class="box__container">
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
                         alt="" class="box__img">
@@ -74,84 +79,12 @@
                         <span class="box__type">Veneno</span>
                     </div>
                 </div>
-            </div>
-
-            <div class="box" id="box" data-id="33">
-                <div class="box__container">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
-                        alt="" class="box__img">
-                </div>
-
-                <span class="box__name--pokemon">Bulbasaur</span>
-
-                <div class="box__data--pokemon">
-                    <span class="box__id--pokemon">N.° 0001</span>
-
-                    <div class="box__type--pokemon">
-                        <span class="box__type">Planta</span>
-                        <span class="box__type">Veneno</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box" id="box" data-id="33">
-                <div class="box__container">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
-                        alt="" class="box__img">
-                </div>
-
-                <span class="box__name--pokemon">Bulbasaur</span>
-
-                <div class="box__data--pokemon">
-                    <span class="box__id--pokemon">N.° 0001</span>
-
-                    <div class="box__type--pokemon">
-                        <span class="box__type">Planta</span>
-                        <span class="box__type">Veneno</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box" id="box" data-id="33">
-                <div class="box__container">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
-                        alt="" class="box__img">
-                </div>
-
-                <span class="box__name--pokemon">Bulbasaur</span>
-
-                <div class="box__data--pokemon">
-                    <span class="box__id--pokemon">N.° 0001</span>
-
-                    <div class="box__type--pokemon">
-                        <span class="box__type">Planta</span>
-                        <span class="box__type">Veneno</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box" id="box" data-id="33">
-                <div class="box__container">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg"
-                        alt="" class="box__img">
-                </div>
-
-                <span class="box__name--pokemon">Bulbasaur</span>
-
-                <div class="box__data--pokemon">
-                    <span class="box__id--pokemon">N.° 0001</span>
-
-                    <div class="box__type--pokemon">
-                        <span class="box__type">Planta</span>
-                        <span class="box__type">Veneno</span>
-                    </div>
-                </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="data" id="data">
             <div class="data__content">
-                <div class="data__card">
+                <!-- <div class="data__card">
                     <div class="data__container">
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/6.gif"
                             alt="" class="data__img--pokemon">
@@ -164,7 +97,7 @@
 
                 <button class="data__close">
                     <i class="fas fa-times"></i>
-                </button>
+                </button> -->
             </div>
         </div>
 

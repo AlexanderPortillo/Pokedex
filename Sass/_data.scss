@@ -50,10 +50,60 @@
 	}
 
 	&__pokemon {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
 
 	&__name {
 		color: white;
+		font-size: 4rem;
+		&::first-letter {
+			text-transform: uppercase;
+		}
+	}
+
+	&__stats {
+		color: white;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		background-color: #4d3c77;
+		padding: 1rem;
+		border-radius: 1rem;
+		box-shadow: 0 0 20px #313866;
+	}
+
+	&__stats--title {
+		font-size: 2rem;
+	}
+
+	&__content--stast {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 0.5rem;
+		gap: 1rem;
+	}
+
+	&__container--stats {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	&__container--span {
+		font-size: 1.2rem;
+	}
+
+	&__container--number {
+		font-size: 1.2rem;
+	}
+
+	&__progress {
+		width: 200px;
+		height: 22px;
 	}
 
 	&__close {

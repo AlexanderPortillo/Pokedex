@@ -19,25 +19,14 @@ const Pokedex = (function object() {
 			datos.id,
 			datos.types[0].type.name,
 			datos.weight / 10,
-			datos.height / 10
+			datos.height / 10,
+			datos.stats[0].base_stat,
+			datos.stats[1].base_stat,
+			datos.stats[2].base_stat,
+			datos.stats[3].base_stat,
+			datos.stats[4].base_stat,
+			datos.stats[5].base_stat
 		);
-
-		// if (tamañoTypes === 1) {
-		// 	return pokemon(
-		// 		datos.sprites.other['official-artwork'].front_default,
-		// 		datos.forms[0].name,
-		// 		datos.id,
-		// 		datos.types[0].type.name
-		// 	);
-		// } else if (tamañoTypes === 2) {
-		// 	return pokemon(
-		// 		datos.sprites.other['official-artwork'].front_default,
-		// 		datos.forms[0].name,
-		// 		datos.id,
-		// 		datos.types[0].type.name,
-		// 		datos.types[1].type.name
-		// 	);
-		// }
 	};
 
 	const cargarPokemon = async () => {

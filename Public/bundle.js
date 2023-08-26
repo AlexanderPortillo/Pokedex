@@ -65,7 +65,20 @@ const background = (tipo) => {
 	}
 };
 
-function Pokemon(urlImagen, nombre, id, tipo, peso, altura) {
+function Pokemon(
+	urlImagen,
+	nombre,
+	id,
+	tipo,
+	peso,
+	altura,
+	ps,
+	ataque,
+	defensa,
+	ataqueEspecial,
+	defensaEspecial,
+	velocidad,
+) {
 	return {
 		urlImagen: urlImagen,
 		nombre: nombre,
@@ -73,6 +86,12 @@ function Pokemon(urlImagen, nombre, id, tipo, peso, altura) {
 		tipo: tipo,
 		peso: peso,
 		altura: altura,
+		ps: ps,
+		ataque: ataque,
+		defensa: defensa,
+		ataqueEspecial: ataqueEspecial,
+		defensaEspecial: defensaEspecial,
+		velocidad: velocidad,
 		obtenerDatos: function () {
 			const plantilla = `
                 <div class="box" id="box" data-id="${this.id}">
@@ -87,7 +106,6 @@ function Pokemon(urlImagen, nombre, id, tipo, peso, altura) {
 
                     <div class="box__data--pokemon">
                         <div class="box__type--pokemon">
-                            <span class="box__type">${this.tipo}</span>
                             <span class="box__type">${this.tipo}</span>
                         </div>
 
@@ -108,6 +126,13 @@ function Pokemon(urlImagen, nombre, id, tipo, peso, altura) {
 		cargarDatos: function () {
 			const data = document.querySelector('.data__content');
 			data.style.background = background(this.tipo);
+			let SumaTotal =
+				this.ps +
+				this.ataque +
+				this.defensa +
+				this.ataqueEspecial +
+				this.defensaEspecial +
+				this.velocidad;
 
 			const plantilla = `
 					<div class="data__card">
@@ -117,7 +142,42 @@ function Pokemon(urlImagen, nombre, id, tipo, peso, altura) {
 						</div>
 
 						<div class="data__pokemon">
-						<h1 class="data__name">${this.nombre}</h1>
+							<h1 class="data__name">${this.nombre}</h1>
+							<div class="data__stats">
+								<span class="data__stats--title">Estadisticas base</span>
+
+								<div class="data__content--stast">
+									<div class="data__container--stats">
+										<span class="data__container--span">Ps</span>
+										<span class="data__container--span">Ataque</span>
+										<span class="data__container--span">Defensa</span>
+										<span class="data__container--span">At. Especial</span>
+										<span class="data__container--span">Def. Especial</span>
+										<span class="data__container--span">Velocidad</span>
+										<span class="data__container--span">Suma Total</span>
+									</div>
+
+									<div class="data__container--stats">
+										<span class="data__container--number">${this.ps}</span>
+										<span class="data__container--number">${this.ataque}</span>
+										<span class="data__container--number">${this.defensa}</span>
+										<span class="data__container--number">${this.ataqueEspecial}</span>
+										<span class="data__container--number">${this.defensaEspecial}</span>
+										<span class="data__container--number">${this.velocidad}</span>
+										<span class="data__container--number">${SumaTotal}</span>
+									</div>
+
+									<div class="data__container--stats">
+										<progress class="data__progress" value="${this.ps}" max="200"></progress>
+										<progress class="data__progress" value="${this.ataque}" max="200"></progress>
+										<progress class="data__progress" value="${this.defensa}" max="200"></progress>
+										<progress class="data__progress" value="${this.ataqueEspecial}" max="200"></progress>
+										<progress class="data__progress" value="${this.defensaEspecial}" max="200"></progress>
+										<progress class="data__progress" value="${this.velocidad}" max="500"></progress>
+										<progress class="data__progress" value="${SumaTotal}" max="1000"></progress>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -133,7 +193,6 @@ function Pokemon(urlImagen, nombre, id, tipo, peso, altura) {
 const container = document.getElementById('boxes');
 const popup = document.getElementById('data');
 const loader = document.querySelector('.wrapper');
-// var tamañoTypes;
 
 const Pokedex = (function object() {
 	const pokemons = [];
@@ -149,25 +208,14 @@ const Pokedex = (function object() {
 			datos.id,
 			datos.types[0].type.name,
 			datos.weight / 10,
-			datos.height / 10
+			datos.height / 10,
+			datos.stats[0].base_stat,
+			datos.stats[1].base_stat,
+			datos.stats[2].base_stat,
+			datos.stats[3].base_stat,
+			datos.stats[4].base_stat,
+			datos.stats[5].base_stat
 		);
-
-		// if (tamañoTypes === 1) {
-		// 	return pokemon(
-		// 		datos.sprites.other['official-artwork'].front_default,
-		// 		datos.forms[0].name,
-		// 		datos.id,
-		// 		datos.types[0].type.name
-		// 	);
-		// } else if (tamañoTypes === 2) {
-		// 	return pokemon(
-		// 		datos.sprites.other['official-artwork'].front_default,
-		// 		datos.forms[0].name,
-		// 		datos.id,
-		// 		datos.types[0].type.name,
-		// 		datos.types[1].type.name
-		// 	);
-		// }
 	};
 
 	const cargarPokemon = async () => {

@@ -17,7 +17,9 @@ const Pokedex = (function object() {
 			datos.sprites.other['official-artwork'].front_default,
 			datos.forms[0].name,
 			datos.id,
-			datos.types[0].type.name
+			datos.types[0].type.name,
+			datos.weight / 10,
+			datos.height / 10
 		);
 
 		// if (tamañoTypes === 1) {

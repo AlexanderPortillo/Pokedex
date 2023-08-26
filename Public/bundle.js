@@ -49,63 +49,65 @@ const dataPokemon = () => {
 	});
 };
 
-var color;
+const background = (tipo) => {
+	let background;
 
-function Pokemon(urlImagen, nombre, id, tipo) {
+	switch (tipo) {
+		case 'grass':
+			background = 'rgba(0, 128, 0, 0.452)';
+			return background;
+		case 'fire':
+			background = 'rgba(0, 128, 0, 0.452)';
+			return background;
+		default:
+			background = 'transparent';
+			return background;
+	}
+};
+
+function Pokemon(urlImagen, nombre, id, tipo, peso, altura) {
 	return {
 		urlImagen: urlImagen,
 		nombre: nombre,
 		id: id,
 		tipo: tipo,
+		peso: peso,
+		altura: altura,
 		obtenerDatos: function () {
-			switch (this.tipo) {
-				case 'grass':
-					color = 'green';
-					break;
-				case 'fire':
-					color = 'red';
-					break;
-				case 'water':
-					color = 'cyan';
-					break;
-				default:
-					color = 'transparent;';
-					break;
-			}
-
 			const plantilla = `
                 <div class="box" id="box" data-id="${this.id}">
-                    <div class="box__container" style="background-color: ${color};">
+                    <div class="box__container" style="background-color: ${background(
+											this.tipo
+										)};">
                         <img src="${this.urlImagen}"
                             alt="" class="box__img">
                     </div>
 
-                    <span class="box__name--pokemon">${this.nombre}</span>
+                    <span class="box__name--pokemon">${this.nombre} - N.° ${this.id}</span>
 
                     <div class="box__data--pokemon">
-                        <span class="box__id--pokemon">N.° ${this.id}</span>
-
                         <div class="box__type--pokemon">
                             <span class="box__type">${this.tipo}</span>
+                            <span class="box__type">${this.tipo}</span>
                         </div>
+
+						<div class="box__data">
+							<div class="box__weight">
+								<i class="fas fa-arrows-up-down"></i>
+								${this.altura}m
+							</div>
+							<div class="box__height">
+								<i class="fas fa-weight-hanging"></i>
+								${this.peso}Kg
+							</div>
+						</div>
                     </div>
                 </div>`;
 			return plantilla;
 		},
 		cargarDatos: function () {
-			switch (this.tipo) {
-				case 'grass':
-					color = 'rgba(0, 128, 0, 0.452)';
-					break;
-				case 'fire':
-					color = 'rgba(0, 128, 0, 0.452)';
-					break;
-				case 'water':
-					color = 'rgba(0, 128, 0, 0.452)';
-					break;
-			}
 			const data = document.querySelector('.data__content');
-			data.style.background = color;
+			data.style.background = background(this.tipo);
 
 			const plantilla = `
 					<div class="data__card">
@@ -145,7 +147,9 @@ const Pokedex = (function object() {
 			datos.sprites.other['official-artwork'].front_default,
 			datos.forms[0].name,
 			datos.id,
-			datos.types[0].type.name
+			datos.types[0].type.name,
+			datos.weight / 10,
+			datos.height / 10
 		);
 
 		// if (tamañoTypes === 1) {

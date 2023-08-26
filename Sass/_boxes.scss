@@ -41,6 +41,12 @@
 	&__name--pokemon {
 		font-size: 1.4rem;
 		font-weight: bold;
+		color: #042169;
+		text-align: center;
+
+		&::first-letter {
+			text-transform: uppercase;
+		}
 	}
 
 	&__data--pokemon {
@@ -49,12 +55,9 @@
 		gap: 0.5rem;
 	}
 
-	&__id--pokemon {
-		font-weight: 500;
-	}
-
 	&__type--pokemon {
 		display: flex;
+		justify-content: space-around;
 		gap: 1rem;
 	}
 
@@ -66,10 +69,43 @@
 	&__type:nth-child(1) {
 		background-color: green;
 		color: black;
+		font-size: 1.2rem;
 	}
 
 	&__type:nth-child(2) {
 		background-color: blueviolet;
 		color: white;
+	}
+
+	&__data {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+		background-color: #3964d1;
+		border-radius: 1rem;
+		transition: background-color 1s, transform 1s;
+
+		&:hover {
+			background-color: #042169;
+			cursor: pointer;
+			transform: scale(1.1);
+		}
+	}
+
+	&__weight,
+	&__height {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.3rem;
+		font-size: 1.2rem;
+		color: #fff;
+
+		i {
+			font-size: 2rem;
+			color: #fbca02;
+		}
 	}
 }

@@ -193,6 +193,7 @@ function Pokemon(
 const container = document.getElementById('boxes');
 const popup = document.getElementById('data');
 const loader = document.querySelector('.wrapper');
+// var tamañoTypes;
 
 const Pokedex = (function object() {
 	const pokemons = [];

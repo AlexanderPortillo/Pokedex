@@ -3,6 +3,10 @@
 	justify-content: center;
 	align-items: center;
 
+	&--active {
+		display: none !important;
+	}
+
 	&__pokeball {
 		width: 60px;
 		height: 60px;
@@ -12,6 +16,7 @@
 		overflow: hidden;
 		border: 3px solid;
 		animation: frames 0.8s linear 0s infinite;
+		box-shadow: 0 0 20px red;
 
 		&::after {
 			content: '';

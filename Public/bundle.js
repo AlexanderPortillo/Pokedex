@@ -49,6 +49,8 @@ const dataPokemon = () => {
 	});
 };
 
+var color;
+
 function Pokemon(urlImagen, nombre, id, tipo) {
 	return {
 		urlImagen: urlImagen,
@@ -56,9 +58,24 @@ function Pokemon(urlImagen, nombre, id, tipo) {
 		id: id,
 		tipo: tipo,
 		obtenerDatos: function () {
+			switch (this.tipo) {
+				case 'grass':
+					color = 'green';
+					break;
+				case 'fire':
+					color = 'red';
+					break;
+				case 'water':
+					color = 'cyan';
+					break;
+				default:
+					color = 'transparent;';
+					break;
+			}
+
 			const plantilla = `
                 <div class="box" id="box" data-id="${this.id}">
-                    <div class="box__container">
+                    <div class="box__container" style="background-color: ${color};">
                         <img src="${this.urlImagen}"
                             alt="" class="box__img">
                     </div>
@@ -75,8 +92,21 @@ function Pokemon(urlImagen, nombre, id, tipo) {
                 </div>`;
 			return plantilla;
 		},
-
 		cargarDatos: function () {
+			switch (this.tipo) {
+				case 'grass':
+					color = 'rgba(0, 128, 0, 0.452)';
+					break;
+				case 'fire':
+					color = 'rgba(0, 128, 0, 0.452)';
+					break;
+				case 'water':
+					color = 'rgba(0, 128, 0, 0.452)';
+					break;
+			}
+			const data = document.querySelector('.data__content');
+			data.style.background = color;
+
 			const plantilla = `
 					<div class="data__card">
 						<div class="data__container">
@@ -90,7 +120,7 @@ function Pokemon(urlImagen, nombre, id, tipo) {
 					</div>
 
 					<button class="data__close">
-						<i class="fas fa-times"></i>
+						<img src="Img/pokemon_moltres_icon-icons.com_67518.png" alt="">
 					</button>`;
 
 			return plantilla;
@@ -101,6 +131,7 @@ function Pokemon(urlImagen, nombre, id, tipo) {
 const container = document.getElementById('boxes');
 const popup = document.getElementById('data');
 const loader = document.querySelector('.wrapper');
+// var tamañoTypes;
 
 const Pokedex = (function object() {
 	const pokemons = [];
@@ -108,12 +139,31 @@ const Pokedex = (function object() {
 	const obtenerPokemon = async (id) => {
 		const resultado = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 		const datos = await resultado.json();
+		// tamañoTypes = datos.types.length;
+
 		return Pokemon(
 			datos.sprites.other['official-artwork'].front_default,
 			datos.forms[0].name,
 			datos.id,
 			datos.types[0].type.name
 		);
+
+		// if (tamañoTypes === 1) {
+		// 	return pokemon(
+		// 		datos.sprites.other['official-artwork'].front_default,
+		// 		datos.forms[0].name,
+		// 		datos.id,
+		// 		datos.types[0].type.name
+		// 	);
+		// } else if (tamañoTypes === 2) {
+		// 	return pokemon(
+		// 		datos.sprites.other['official-artwork'].front_default,
+		// 		datos.forms[0].name,
+		// 		datos.id,
+		// 		datos.types[0].type.name,
+		// 		datos.types[1].type.name
+		// 	);
+		// }
 	};
 
 	const cargarPokemon = async () => {

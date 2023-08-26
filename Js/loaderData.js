@@ -3,6 +3,7 @@ import pokemon from './objectPokemon';
 const container = document.getElementById('boxes');
 const popup = document.getElementById('data');
 const loader = document.querySelector('.wrapper');
+// var tamañoTypes;
 
 const Pokedex = (function object() {
 	const pokemons = [];
@@ -10,12 +11,31 @@ const Pokedex = (function object() {
 	const obtenerPokemon = async (id) => {
 		const resultado = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 		const datos = await resultado.json();
+		// tamañoTypes = datos.types.length;
+
 		return pokemon(
 			datos.sprites.other['official-artwork'].front_default,
 			datos.forms[0].name,
 			datos.id,
 			datos.types[0].type.name
 		);
+
+		// if (tamañoTypes === 1) {
+		// 	return pokemon(
+		// 		datos.sprites.other['official-artwork'].front_default,
+		// 		datos.forms[0].name,
+		// 		datos.id,
+		// 		datos.types[0].type.name
+		// 	);
+		// } else if (tamañoTypes === 2) {
+		// 	return pokemon(
+		// 		datos.sprites.other['official-artwork'].front_default,
+		// 		datos.forms[0].name,
+		// 		datos.id,
+		// 		datos.types[0].type.name,
+		// 		datos.types[1].type.name
+		// 	);
+		// }
 	};
 
 	const cargarPokemon = async () => {

@@ -39,6 +39,10 @@
 			border-bottom: 1px solid #306bb1;
 			transform: scale(1.4);
 		}
+
+		&:last-child {
+			display: none;
+		}
 	}
 
 	&__li--active {
@@ -56,5 +60,38 @@
 	&__item {
 		color: #2a6cb4;
 		position: relative;
+	}
+}
+
+@media (max-width: 555px) {
+	body {
+		padding: 0;
+	}
+
+	.nav {
+		padding: 0;
+		&__ol {
+			font-size: 1.3rem;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+	}
+}
+
+@media (max-width: 460px) {
+	.nav {
+		flex-direction: row;
+		justify-content: space-around;
+
+		&__li {
+			display: none;
+		}
+
+		&__li:last-child {
+			display: block;
+			border: none;
+			transform: scale(1);
+		}
 	}
 }

@@ -40,7 +40,47 @@
                     <a href="https://github.com/AlexanderPortillo/Pokedex" target="_blank"
                         class="nav__item">Repositorio</a>
                 </li>
+
+                <li class="nav__li">
+                    <button class="mobile__bars" data-accion="menu">
+                        <img src="Img/Pokeballs_icon-icons.com_67532.png" alt="" class="mobile__img">
+                    </button>
+                </li>
             </ol>
+        </div>
+
+        <div class="mobile mobile--disabled">
+            <div class="mobile__container--btn">
+                <button class="mobile__close" data-accion="close">
+                    <img src="Img/hatching_egg_icon-icons.com_67551.png" alt="" class="mobile__img">
+                </button>
+            </div>
+
+            <div class="mobile__container">
+                <div class="mobile__logo">
+                    <img src="Img/International_Pokémon_logo.svg.png" alt="" class="mobile__logo--img">
+                </div>
+
+                <ol class="mobile__ol">
+                    <li class="mobile__li mobile__li--one">
+                        <a href="#" class="mobile__item" data-accion="home">Inicio</a>
+                    </li>
+
+                    <li class="mobile__li mobile__li--two mobile__li--active">
+                        <a href="#" class="mobile__item" data-accion="pokedex">Pokédex</a>
+                    </li>
+
+                    <li class="mobile__li">
+                        <a href="https://pokeapi.co/" target="_blank" class="mobile__item"
+                            data-accion="exit">PokéApi</a>
+                    </li>
+
+                    <li class="mobile__li">
+                        <a href="https://github.com/AlexanderPortillo/Pokedex" target="_blank" class="mobile__item"
+                            data-accion="exit">Repositorio</a>
+                    </li>
+                </ol>
+            </div>
         </div>
 
         <div class="header">
@@ -70,9 +110,9 @@
             </div>
         </div>
 
-        <div class="data" id="data">
+        <div class="data data--activ" id="data">
             <div class="data__content">
-                <!-- <div class="data__card">
+                <div class="data__card">
                     <div class="data__container">
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/6.gif"
                             alt="" class="data__img--pokemon">
@@ -121,7 +161,7 @@
 
                 <button class="data__close">
                     <img src="Img/pokemon_moltres_icon-icons.com_67518.png" alt="">
-                </button> -->
+                </button>
             </div>
         </div>
 

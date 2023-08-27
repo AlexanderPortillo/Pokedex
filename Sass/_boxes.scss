@@ -64,17 +64,16 @@
 	&__type {
 		padding: 0.5rem 1rem;
 		border-radius: 1rem;
+		color: #020b1f;
+		font-weight: bold;
 	}
 
 	&__type:nth-child(1) {
-		background-color: green;
-		color: black;
 		font-size: 1.2rem;
 	}
 
 	&__type:nth-child(2) {
-		background-color: blueviolet;
-		color: white;
+		background-color: blueviolet !important;
 	}
 
 	&__data {

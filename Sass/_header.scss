@@ -77,3 +77,27 @@
 		}
 	}
 }
+
+@media (max-width: 555px) {
+	.header {
+		&__search {
+			width: 95%;
+			height: 45px;
+		}
+
+		&__search--icon {
+			font-size: 1rem;
+		}
+
+		&__input--search {
+			padding: 0.5rem;
+			font-size: 1rem;
+		}
+
+		&__search--btn {
+			width: 90px;
+			height: 30px;
+			font-size: 1rem;
+		}
+	}
+}

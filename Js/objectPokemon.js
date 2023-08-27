@@ -40,7 +40,9 @@ export default function Pokemon(
 										)};">
                         <img src="${this.urlImagen}" alt="" class="box__img">
                     </div>
-                    <span class="box__name--pokemon">${this.nombre} - N.° ${this.id}</span>
+                    <span class="box__name--pokemon">${this.nombre}
+					<br>
+					N°. ${this.id}</span>
                     <div class="box__data--pokemon">
                         <div class="box__type--pokemon">
                             ${typeSpans}

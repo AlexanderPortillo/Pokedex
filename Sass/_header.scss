@@ -32,6 +32,18 @@
 		display: flex;
 	}
 
+	&__search--pokemon {
+		display: none;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		gap: 2rem;
+
+		&--active {
+			display: flex;
+		}
+	}
+
 	&__search--icon {
 		font-size: 2rem;
 		color: #0c356a;

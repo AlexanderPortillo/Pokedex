@@ -5,6 +5,7 @@ export default function Pokemon(
 	nombre,
 	id,
 	tipo,
+	tipos,
 	peso,
 	altura,
 	ps,
@@ -12,13 +13,14 @@ export default function Pokemon(
 	defensa,
 	ataqueEspecial,
 	defensaEspecial,
-	velocidad,
+	velocidad
 ) {
 	return {
 		urlImagen: urlImagen,
 		nombre: nombre,
 		id: id,
 		tipo: tipo,
+		tipos: tipos,
 		peso: peso,
 		altura: altura,
 		ps: ps,
@@ -28,32 +30,31 @@ export default function Pokemon(
 		defensaEspecial: defensaEspecial,
 		velocidad: velocidad,
 		obtenerDatos: function () {
+			const typeSpans = this.tipos
+				.map((type) => `<span class="box__type">${type}</span>`)
+				.join('');
 			const plantilla = `
                 <div class="box" id="box" data-id="${this.id}">
                     <div class="box__container" style="background-color: ${background(
 											this.tipo
 										)};">
-                        <img src="${this.urlImagen}"
-                            alt="" class="box__img">
+                        <img src="${this.urlImagen}" alt="" class="box__img">
                     </div>
-
                     <span class="box__name--pokemon">${this.nombre} - N.° ${this.id}</span>
-
                     <div class="box__data--pokemon">
                         <div class="box__type--pokemon">
-                            <span class="box__type">${this.tipo}</span>
+                            ${typeSpans}
                         </div>
-
-						<div class="box__data">
-							<div class="box__weight">
-								<i class="fas fa-arrows-up-down"></i>
-								${this.altura}m
-							</div>
-							<div class="box__height">
-								<i class="fas fa-weight-hanging"></i>
-								${this.peso}Kg
-							</div>
-						</div>
+                        <div class="box__data">
+                            <div class="box__weight">
+                                <i class="fas fa-arrows-up-down"></i>
+                                ${this.altura}m
+                            </div>
+                            <div class="box__height">
+                                <i class="fas fa-weight-hanging"></i>
+                                ${this.peso}Kg
+                            </div>
+                        </div>
                     </div>
                 </div>`;
 			return plantilla;

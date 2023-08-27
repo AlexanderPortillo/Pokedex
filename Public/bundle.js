@@ -54,13 +54,67 @@ const background = (tipo) => {
 
 	switch (tipo) {
 		case 'grass':
-			background = 'rgba(0, 128, 0, 0.452)';
+			background = 'rgba(0, 255, 0, 0.452)';
 			return background;
+
 		case 'fire':
-			background = 'rgba(0, 128, 0, 0.452)';
+			background = 'rgba(255, 78, 0, 0.452)';
 			return background;
+
+		case 'water':
+			background = 'rgba(99, 138, 225, 0.452)';
+			return background;
+
+		case 'bug':
+			background = 'rgba(0, 78, 0, 0.452)';
+			return background;
+
+		case 'normal':
+			background = 'rgba(150, 153, 125, 0.452)';
+			return background;
+
+		case 'poison':
+			background = 'rgba(152, 0, 255, 0.452)';
+			return background;
+
+		case 'electric':
+			background = 'rgba(255, 255, 0, 0.452)';
+			return background;
+
+		case 'ground':
+			background = 'rgba(200, 173, 110, 0.452)';
+			return background;
+
+		case 'fairy':
+			background = 'rgba(255, 0, 255, 0.452)';
+			return background;
+
+		case 'psychic':
+			background = 'rgba(255, 71, 47, 0.452)';
+			return background;
+
+		case 'fighting':
+			background = 'rgba(255, 0, 0, 0.452)';
+			return background;
+
+		case 'rock':
+			background = 'rgba(49, 29, 0, 0.452)';
+			return background;
+
+		case 'ghost':
+			background = 'rgba(29, 0, 123, 0.452)';
+			return background;
+
+		case 'ice':
+			background = 'rgba(0, 207, 202, 0.452)';
+			return background;
+
+		case 'dragon':
+			background = 'rgba(30, 0, 255, 0.452)';
+			return background;
+
 		default:
-			background = 'transparent';
+			background = 'black';
 			return background;
 	}
 };
@@ -70,6 +124,7 @@ function Pokemon(
 	nombre,
 	id,
 	tipo,
+	tipos,
 	peso,
 	altura,
 	ps,
@@ -77,13 +132,14 @@ function Pokemon(
 	defensa,
 	ataqueEspecial,
 	defensaEspecial,
-	velocidad,
+	velocidad
 ) {
 	return {
 		urlImagen: urlImagen,
 		nombre: nombre,
 		id: id,
 		tipo: tipo,
+		tipos: tipos,
 		peso: peso,
 		altura: altura,
 		ps: ps,
@@ -93,32 +149,31 @@ function Pokemon(
 		defensaEspecial: defensaEspecial,
 		velocidad: velocidad,
 		obtenerDatos: function () {
+			const typeSpans = this.tipos
+				.map((type) => `<span class="box__type">${type}</span>`)
+				.join('');
 			const plantilla = `
                 <div class="box" id="box" data-id="${this.id}">
                     <div class="box__container" style="background-color: ${background(
 											this.tipo
 										)};">
-                        <img src="${this.urlImagen}"
-                            alt="" class="box__img">
+                        <img src="${this.urlImagen}" alt="" class="box__img">
                     </div>
-
                     <span class="box__name--pokemon">${this.nombre} - N.° ${this.id}</span>
-
                     <div class="box__data--pokemon">
                         <div class="box__type--pokemon">
-                            <span class="box__type">${this.tipo}</span>
+                            ${typeSpans}
                         </div>
-
-						<div class="box__data">
-							<div class="box__weight">
-								<i class="fas fa-arrows-up-down"></i>
-								${this.altura}m
-							</div>
-							<div class="box__height">
-								<i class="fas fa-weight-hanging"></i>
-								${this.peso}Kg
-							</div>
-						</div>
+                        <div class="box__data">
+                            <div class="box__weight">
+                                <i class="fas fa-arrows-up-down"></i>
+                                ${this.altura}m
+                            </div>
+                            <div class="box__height">
+                                <i class="fas fa-weight-hanging"></i>
+                                ${this.peso}Kg
+                            </div>
+                        </div>
                     </div>
                 </div>`;
 			return plantilla;
@@ -193,21 +248,24 @@ function Pokemon(
 const container = document.getElementById('boxes');
 const popup = document.getElementById('data');
 const loader = document.querySelector('.wrapper');
-// var tamañoTypes;
+const header = document.querySelector('.prueba');
 
-const Pokedex = (function object() {
+const Pokedex = (function () {
 	const pokemons = [];
+	const busquedasRecientes = [];
 
 	const obtenerPokemon = async (id) => {
 		const resultado = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 		const datos = await resultado.json();
-		// tamañoTypes = datos.types.length;
 
-		return Pokemon(
+		const tipos = datos.types.map((typeData) => typeData.type.name);
+
+		return new Pokemon(
 			datos.sprites.other['official-artwork'].front_default,
 			datos.forms[0].name,
 			datos.id,
 			datos.types[0].type.name,
+			tipos,
 			datos.weight / 10,
 			datos.height / 10,
 			datos.stats[0].base_stat,
@@ -220,7 +278,7 @@ const Pokedex = (function object() {
 	};
 
 	const cargarPokemon = async () => {
-		loader.style.display = 'block'; // Muestra el loader al iniciar la carga
+		loader.style.display = 'block';
 
 		for (let i = 1; i <= 151; i++) {
 			const pokemon = await obtenerPokemon(i);
@@ -229,7 +287,29 @@ const Pokedex = (function object() {
 			}
 		}
 
-		loader.style.display = 'none'; // Oculta el loader cuando la carga ha finalizado
+		loader.style.display = 'none';
+	};
+
+	const buscarPokemon = async () => {
+		const btnSearch = document.querySelector('.header__search--btn');
+
+		btnSearch.addEventListener('click', async (e) => {
+			e.preventDefault();
+			const idPokemon = document.querySelector('.header__input--search').value;
+			const pokemon = await obtenerPokemon(idPokemon);
+
+			if (pokemon) {
+				busquedasRecientes.unshift(pokemon); // Agrega el nuevo pokemon al inicio del array
+				header.innerHTML = '';
+				dibujarBusqueda();
+			}
+		});
+	};
+
+	const dibujarBusqueda = () => {
+		busquedasRecientes.forEach((pokemon) => {
+			header.innerHTML += pokemon.obtenerDatos();
+		});
 	};
 
 	const dibujarPokedex = () => {
@@ -255,16 +335,16 @@ const Pokedex = (function object() {
 		cargarPokemon: cargarPokemon,
 		obtenerPokemon: obtenerPokemon,
 		datosPokemon: datosPokemon,
+		buscarPokemon: buscarPokemon,
 	};
 })();
 
-// Carga los Pokémon y luego dibuja la Pokédex en el documento.
 Pokedex.cargarPokemon().then(() => {
 	Pokedex.dibujarPokedex();
 	Pokedex.datosPokemon();
+	Pokedex.buscarPokemon(); // Agrega la funcionalidad de búsqueda
 });
 
-// Exporta la función dibujarPokedex del módulo Pokedex.
 var loaderData = Pokedex.dibujarPokedex;
 
 activeOpctions();

@@ -3,21 +3,24 @@ import pokemon from './objectPokemon';
 const container = document.getElementById('boxes');
 const popup = document.getElementById('data');
 const loader = document.querySelector('.wrapper');
-// var tamañoTypes;
+const header = document.querySelector('.prueba');
 
-const Pokedex = (function object() {
+const Pokedex = (function () {
 	const pokemons = [];
+	const busquedasRecientes = [];
 
 	const obtenerPokemon = async (id) => {
 		const resultado = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 		const datos = await resultado.json();
-		// tamañoTypes = datos.types.length;
 
-		return pokemon(
+		const tipos = datos.types.map((typeData) => typeData.type.name);
+
+		return new pokemon(
 			datos.sprites.other['official-artwork'].front_default,
 			datos.forms[0].name,
 			datos.id,
 			datos.types[0].type.name,
+			tipos,
 			datos.weight / 10,
 			datos.height / 10,
 			datos.stats[0].base_stat,
@@ -30,7 +33,7 @@ const Pokedex = (function object() {
 	};
 
 	const cargarPokemon = async () => {
-		loader.style.display = 'block'; // Muestra el loader al iniciar la carga
+		loader.style.display = 'block';
 
 		for (let i = 1; i <= 151; i++) {
 			const pokemon = await obtenerPokemon(i);
@@ -39,7 +42,29 @@ const Pokedex = (function object() {
 			}
 		}
 
-		loader.style.display = 'none'; // Oculta el loader cuando la carga ha finalizado
+		loader.style.display = 'none';
+	};
+
+	const buscarPokemon = async () => {
+		const btnSearch = document.querySelector('.header__search--btn');
+
+		btnSearch.addEventListener('click', async (e) => {
+			e.preventDefault();
+			const idPokemon = document.querySelector('.header__input--search').value;
+			const pokemon = await obtenerPokemon(idPokemon);
+
+			if (pokemon) {
+				busquedasRecientes.unshift(pokemon); // Agrega el nuevo pokemon al inicio del array
+				header.innerHTML = '';
+				dibujarBusqueda();
+			}
+		});
+	};
+
+	const dibujarBusqueda = () => {
+		busquedasRecientes.forEach((pokemon) => {
+			header.innerHTML += pokemon.obtenerDatos();
+		});
 	};
 
 	const dibujarPokedex = () => {
@@ -65,14 +90,14 @@ const Pokedex = (function object() {
 		cargarPokemon: cargarPokemon,
 		obtenerPokemon: obtenerPokemon,
 		datosPokemon: datosPokemon,
+		buscarPokemon: buscarPokemon,
 	};
 })();
 
-// Carga los Pokémon y luego dibuja la Pokédex en el documento.
 Pokedex.cargarPokemon().then(() => {
 	Pokedex.dibujarPokedex();
 	Pokedex.datosPokemon();
+	Pokedex.buscarPokemon(); // Agrega la funcionalidad de búsqueda
 });
 
-// Exporta la función dibujarPokedex del módulo Pokedex.
 export default Pokedex.dibujarPokedex;

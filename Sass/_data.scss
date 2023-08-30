@@ -17,6 +17,10 @@
 		display: flex;
 	}
 
+	&--disabled {
+		display: none !important;
+	}
+
 	&__content {
 		min-width: 1200px;
 		height: auto;
@@ -64,6 +68,12 @@
 		}
 	}
 
+	&__abilities {
+		width: 100px;
+		height: 100px;
+		background-color: red;
+	}
+
 	&__stats {
 		color: white;
 		display: flex;
@@ -74,6 +84,12 @@
 		border-radius: 1rem;
 		background-color: #0000002a;
 		// box-shadow: 0 0 20px #313866;
+	}
+
+	&__moves {
+		width: 100px;
+		height: 100px;
+		background-color: yellow;
 	}
 
 	&__stats--title {

@@ -6,6 +6,11 @@ const boxes = document.querySelector('.boxes');
 const header = document.querySelector('.header__search--pokemon');
 const mobile = document.querySelector('.mobile');
 
+const data = document.querySelector('.data__container--btn');
+const abilities = document.querySelector('.data__abilities');
+const stats = document.querySelector('.data__stats');
+const moves = document.querySelector('.data__moves');
+
 const activeOpctions = () => {
 	navbar.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
@@ -38,7 +43,7 @@ const activeOpctions = () => {
 };
 
 const mobileActive = () => {
-	mobile.addEventListener('click', function (e) {
+	mobile.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
 		const link = e.target.closest('a');
 
@@ -80,4 +85,23 @@ const mobileActive = () => {
 	});
 };
 
-export { activeOpctions, mobileActive };
+const activeData = () => {
+	data.addEventListener('click', (e) => {
+		const active = e.target.closest('button');
+
+		if (active?.dataset?.accion === 'abilities') {
+			e.preventDefault();
+		}
+
+		if (active?.dataset?.accion === 'stats') {
+			e.preventDefault();
+			abilities.classList.add('data--disabled');
+		}
+
+		if (active?.dataset?.accion === 'moves') {
+			e.preventDefault();
+		}
+	});
+};
+
+export { activeOpctions, mobileActive, activeData };

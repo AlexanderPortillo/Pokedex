@@ -31,19 +31,18 @@ export default function Pokemon(
 		velocidad: velocidad,
 		obtenerDatos: function () {
 			const typeSpans = this.tipos
-				.map(
-					(type) =>
-						`<span class="box__type" style="background-color: ${background(
-							this.tipo
-						)};">${type}</span>`
-				)
+				.map((type) => `<span class="box__type">${type}</span>`)
 				.join('');
 
 			const plantilla = `
-                <div class="box" id="box" data-id="${this.id}">
+                <div class="box" id="box" data-id="${
+									this.id
+								}" style="border: 4px solid ${background(
+				this.tipo
+			)}; box-shadow: 0 5px 20px ${background(this.tipo)};">
                     <div class="box__container" style="background-color: ${background(
 											this.tipo
-										)};">
+										)}; box-shadow: 0 5px 20px ${background(this.tipo)};">
                         <img src="${this.urlImagen}" alt="" class="box__img">
                     </div>
                     <span class="box__name--pokemon">${this.nombre}
@@ -53,9 +52,7 @@ export default function Pokemon(
                         <div class="box__type--pokemon">
                             ${typeSpans}
                         </div>
-                        <div class="box__data" style="background-color: ${background(
-													this.tipo
-												)};">
+                        <div class="box__data">
                             <div class="box__weight">
                                 <i class="fas fa-arrows-up-down"></i>
                                 ${this.altura}m

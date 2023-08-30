@@ -8,6 +8,11 @@ const boxes = document.querySelector('.boxes');
 const header = document.querySelector('.header__search--pokemon');
 const mobile = document.querySelector('.mobile');
 
+document.querySelector('.data__container--btn');
+document.querySelector('.data__abilities');
+document.querySelector('.data__stats');
+document.querySelector('.data__moves');
+
 const activeOpctions = () => {
 	navbar.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
@@ -40,7 +45,7 @@ const activeOpctions = () => {
 };
 
 const mobileActive = () => {
-	mobile.addEventListener('click', function (e) {
+	mobile.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
 		const link = e.target.closest('a');
 
@@ -202,19 +207,18 @@ function Pokemon(
 		velocidad: velocidad,
 		obtenerDatos: function () {
 			const typeSpans = this.tipos
-				.map(
-					(type) =>
-						`<span class="box__type" style="background-color: ${background(
-							this.tipo
-						)};">${type}</span>`
-				)
+				.map((type) => `<span class="box__type">${type}</span>`)
 				.join('');
 
 			const plantilla = `
-                <div class="box" id="box" data-id="${this.id}">
+                <div class="box" id="box" data-id="${
+									this.id
+								}" style="border: 4px solid ${background(
+				this.tipo
+			)}; box-shadow: 0 5px 20px ${background(this.tipo)};">
                     <div class="box__container" style="background-color: ${background(
 											this.tipo
-										)};">
+										)}; box-shadow: 0 5px 20px ${background(this.tipo)};">
                         <img src="${this.urlImagen}" alt="" class="box__img">
                     </div>
                     <span class="box__name--pokemon">${this.nombre}
@@ -224,9 +228,7 @@ function Pokemon(
                         <div class="box__type--pokemon">
                             ${typeSpans}
                         </div>
-                        <div class="box__data" style="background-color: ${background(
-													this.tipo
-												)};">
+                        <div class="box__data">
                             <div class="box__weight">
                                 <i class="fas fa-arrows-up-down"></i>
                                 ${this.altura}m
@@ -461,4 +463,5 @@ activeOpctions();
 dataPokemon();
 loaderData();
 mobileActive();
+// activeData();
 //# sourceMappingURL=bundle.js.map

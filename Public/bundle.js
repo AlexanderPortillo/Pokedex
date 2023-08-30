@@ -1,5 +1,6 @@
 'use strict';
 
+// !Creacion de constantes para el llamado de clases de la pokedex
 const navbar = document.querySelector('.nav');
 const search = document.querySelector('.header__search');
 const itemOne = document.querySelector('.nav__li--one');
@@ -9,10 +10,12 @@ const header = document.querySelector('.header__search--pokemon');
 const mobile = document.querySelector('.mobile');
 
 const activeOpctions = () => {
+	// !Activa las opciones de la pokedex
 	navbar.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
 		const link = e.target.closest('a');
 
+		// !Activamos el retiro del menu para movil
 		if (btn?.dataset?.accion === 'menu') {
 			mobile.classList.remove('mobile--disabled');
 		}
@@ -39,6 +42,7 @@ const activeOpctions = () => {
 	});
 };
 
+// !Activamos la forma movil de la pokedex
 const mobileActive = () => {
 	mobile.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
@@ -101,6 +105,7 @@ const dataPokemon = () => {
 	});
 };
 
+// !Ubicamos la seleccion de color para las tarjeta tanto principal y secundaria
 const background = (tipo) => {
 	let background;
 
@@ -171,6 +176,9 @@ const background = (tipo) => {
 	}
 };
 
+// !Funcion que almacena la informacion del pokemon y
+// !utiliza el contenido que brinda background.js para
+// !dar color a la tarjeta por el tipo de pokemon.
 function Pokemon(
 	urlImagen,
 	nombre,
@@ -205,10 +213,12 @@ function Pokemon(
 		movimientos: movimientos,
 		habilidades: habilidades,
 		obtenerDatos: function () {
+			// !Traemos el tipo de pokemon
 			const typeSpans = this.tipos
 				.map((type) => `<span class="box__type">${type}</span>`)
 				.join('');
 
+			// !Se estructura la base de la tarjeta principal y muestra el contenido principal de cada pokemon
 			const plantilla = `
                 <div class="box" id="box" data-id="${
 									this.id
@@ -261,6 +271,7 @@ function Pokemon(
 				this.defensaEspecial +
 				this.velocidad;
 
+			// !Se estructura la base de la tarjeta secundaria y muestra el contenido secundario de cada pokemon, ademas extraemos datos de la Api 
 			const plantilla = `
 					<div class="data__card">
 						<div class="data__container">
@@ -335,9 +346,11 @@ const Pokedex = (function () {
 	const busquedasRecientes = [];
 
 	const obtenerPokemon = async (id) => {
+		// !Busqueda de datos en la Api
 		const resultado = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 		const datos = await resultado.json();
 
+		// !Consigue el tipo de dato del pokemon
 		const tipos = datos.types.map((typeData) => typeData.type.name);
 		const movimientos = datos.moves.map((moveData) => moveData.move.name);
 		const habilidades = datos.abilities.map((abi) => abi.ability.name);
@@ -361,6 +374,7 @@ const Pokedex = (function () {
 		);
 	};
 
+	// !Carga los 151 pokemon de la Podex haciendo un for que recorre los datos de cada pokemon
 	const cargarPokemon = async () => {
 		const loader = document.querySelector('.wrapper');
 
@@ -373,7 +387,7 @@ const Pokedex = (function () {
 			}
 		}
 
-		loader.style.display = 'none';
+		loader.style.display = 'none'; // !Cuando no aparece un dato existente
 	};
 
 	const dibujarPokedex = () => {
@@ -399,7 +413,8 @@ const Pokedex = (function () {
 				header.innerHTML = '';
 
 				let pokemonEncontrado = null;
-
+				
+				// !Busca a cada pokemon
 				busquedasRecientes.forEach((pokemon) => {
 					if (pokemon.id === id) {
 						pokemonEncontrado = pokemon;
@@ -432,6 +447,7 @@ const Pokedex = (function () {
 		const header = document.querySelector('.header__search--pokemon');
 		header.innerHTML = '';
 
+		// !Busca a cada pokemon
 		busquedasRecientes.forEach((pokemon) => {
 			const container = document.querySelector('.header__search--pokemon');
 			const popup = document.getElementById('data');

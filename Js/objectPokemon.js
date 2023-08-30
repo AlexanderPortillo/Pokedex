@@ -1,5 +1,8 @@
 import background from './background';
 
+// !Funcion que almacena la informacion del pokemon y
+// !utiliza el contenido que brinda background.js para
+// !dar color a la tarjeta por el tipo de pokemon.
 export default function Pokemon(
 	urlImagen,
 	nombre,
@@ -34,10 +37,12 @@ export default function Pokemon(
 		movimientos: movimientos,
 		habilidades: habilidades,
 		obtenerDatos: function () {
+			// !Traemos el tipo de pokemon
 			const typeSpans = this.tipos
 				.map((type) => `<span class="box__type">${type}</span>`)
 				.join('');
 
+			// !Se estructura la base de la tarjeta principal y muestra el contenido principal de cada pokemon
 			const plantilla = `
                 <div class="box" id="box" data-id="${
 									this.id
@@ -90,6 +95,7 @@ export default function Pokemon(
 				this.defensaEspecial +
 				this.velocidad;
 
+			// !Se estructura la base de la tarjeta secundaria y muestra el contenido secundario de cada pokemon, ademas extraemos datos de la Api 
 			const plantilla = `
 					<div class="data__card">
 						<div class="data__container">

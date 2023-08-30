@@ -13,7 +13,9 @@ export default function Pokemon(
 	defensa,
 	ataqueEspecial,
 	defensaEspecial,
-	velocidad
+	velocidad,
+	movimientos,
+	habilidades
 ) {
 	return {
 		urlImagen: urlImagen,
@@ -29,6 +31,8 @@ export default function Pokemon(
 		ataqueEspecial: ataqueEspecial,
 		defensaEspecial: defensaEspecial,
 		velocidad: velocidad,
+		movimientos: movimientos,
+		habilidades: habilidades,
 		obtenerDatos: function () {
 			const typeSpans = this.tipos
 				.map((type) => `<span class="box__type">${type}</span>`)
@@ -68,6 +72,15 @@ export default function Pokemon(
 		},
 		cargarDatos: function () {
 			const data = document.querySelector('.data__content');
+
+			const moves = this.movimientos
+				.map((move) => `<span class="data__move" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">${move}</span>`)
+				.join('');
+
+			const abilities = this.habilidades
+				.map((ability) => `<span class="data__move" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">${ability}</span>`)
+				.join('');
+
 			data.style.background = background(this.tipo);
 			let SumaTotal =
 				this.ps +
@@ -85,46 +98,59 @@ export default function Pokemon(
 						</div>
 
 						<div class="data__pokemon">
-							<h1 class="data__name">${this.nombre}</h1>
-							<div class="data__stats">
-								<span class="data__stats--title">Estadisticas base</span>
+                        <h1 class="data__name">${this.nombre}</h1>
 
-								<div class="data__content--stast">
-									<div class="data__container--stats">
-										<span class="data__container--span">Ps</span>
-										<span class="data__container--span">Ataque</span>
-										<span class="data__container--span">Defensa</span>
-										<span class="data__container--span">At. Especial</span>
-										<span class="data__container--span">Def. Especial</span>
-										<span class="data__container--span">Velocidad</span>
-										<span class="data__container--span">Suma Total</span>
-									</div>
+                        <div class="data__container--btn">
+                            <button class="data__btn btn--abilities" data-accion="abilities" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Abilities</button>
+                            <button class="data__btn btn--stats" data-accion="stats" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Stast</button>
+                            <button class="data__btn btn--moves" data-accion="moves" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Moves</button>
+                        </div>
 
-									<div class="data__container--stats">
-										<span class="data__container--number">${this.ps}</span>
-										<span class="data__container--number">${this.ataque}</span>
-										<span class="data__container--number">${this.defensa}</span>
-										<span class="data__container--number">${this.ataqueEspecial}</span>
-										<span class="data__container--number">${this.defensaEspecial}</span>
-										<span class="data__container--number">${this.velocidad}</span>
-										<span class="data__container--number">${SumaTotal}</span>
-									</div>
-
-									<div class="data__container--stats">
-										<progress class="data__progress" value="${this.ps}" max="200"></progress>
-										<progress class="data__progress" value="${this.ataque}" max="200"></progress>
-										<progress class="data__progress" value="${this.defensa}" max="200"></progress>
-										<progress class="data__progress" value="${this.ataqueEspecial}" max="200"></progress>
-										<progress class="data__progress" value="${this.defensaEspecial}" max="200"></progress>
-										<progress class="data__progress" value="${this.velocidad}" max="500"></progress>
-										<progress class="data__progress" value="${SumaTotal}" max="1000"></progress>
-									</div>
-								</div>
-							</div>
+                        <div class="data__abilities">
+						${abilities}
 						</div>
+
+                        <div class="data__stats data--disabled">
+                            <span class="data__stats--title">Estadisticas base</span>
+
+                            <div class="data__content--stast">
+                                <div class="data__container--stats">
+                                    <span class="data__container--span">Ps</span>
+                                    <span class="data__container--span">Ataque</span>
+                                    <span class="data__container--span">Defensa</span>
+                                    <span class="data__container--span">Velocidad</span>
+                                    <span class="data__container--span">At. Especial</span>
+                                    <span class="data__container--span">Def. Especial</span>
+                                    <span class="data__container--span">Suma Total</span>
+                                </div>
+
+                                <div class="data__container--stats">
+									<span class="data__container--number">${this.ps}</span>
+									<span class="data__container--number">${this.ataque}</span>
+									<span class="data__container--number">${this.defensa}</span>
+									<span class="data__container--number">${this.ataqueEspecial}</span>
+									<span class="data__container--number">${this.defensaEspecial}</span>
+									<span class="data__container--number">${this.velocidad}</span>
+									<span class="data__container--number">${SumaTotal}</span>
+                                </div>
+
+                                <div class="data__container--stats">
+									<progress class="data__progress" value="${this.ps}" max="200"></progress>
+									<progress class="data__progress" value="${this.ataque}" max="200"></progress>
+									<progress class="data__progress" value="${this.defensa}" max="200"></progress>
+									<progress class="data__progress" value="${this.ataqueEspecial}" max="200"></progress>
+									<progress class="data__progress" value="${this.defensaEspecial}" max="200"></progress>
+									<progress class="data__progress" value="${this.velocidad}" max="500"></progress>
+									<progress class="data__progress" value="${SumaTotal}" max="1000"></progress>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="data__moves data--disabled">${moves}</div>
+                    </div>
 					</div>
 
-					<button class="data__close">
+					<button class="data__close" data-accion="close">
 						<img src="Img/pokemon_moltres_icon-icons.com_67518.png" alt="">
 					</button>`;
 

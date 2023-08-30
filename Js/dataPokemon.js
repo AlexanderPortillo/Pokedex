@@ -9,9 +9,9 @@ const dataPokemon = () => {
 	});
 
 	datos.addEventListener('click', (e) => {
-		e.preventDefault();
+		const link = e.target.closest('button');
 
-		if (e.target.closest('button')) {
+		if (link?.dataset?.accion === 'close') {
 			datos.classList.remove('data--active');
 		}
 	});

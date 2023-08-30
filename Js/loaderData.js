@@ -9,6 +9,8 @@ const Pokedex = (function () {
 		const datos = await resultado.json();
 
 		const tipos = datos.types.map((typeData) => typeData.type.name);
+		const movimientos = datos.moves.map((moveData) => moveData.move.name);
+		const habilidades = datos.abilities.map((abi) => abi.ability.name);
 
 		return new Pokemon(
 			datos.sprites.other['official-artwork'].front_default,
@@ -23,7 +25,9 @@ const Pokedex = (function () {
 			datos.stats[2].base_stat,
 			datos.stats[3].base_stat,
 			datos.stats[4].base_stat,
-			datos.stats[5].base_stat
+			datos.stats[5].base_stat,
+			movimientos,
+			habilidades
 		);
 	};
 
@@ -112,6 +116,49 @@ const Pokedex = (function () {
 					const datosHTML = resultado.cargarDatos();
 					const dataContent = document.querySelector('.data__content');
 					dataContent.innerHTML = datosHTML;
+					const data = document.querySelector('.data__card');
+					const abilities = document.querySelector('.data__abilities');
+					const stats = document.querySelector('.data__stats');
+					const moves = document.querySelector('.data__moves');
+
+					const btnAbilities = document.querySelector('.btn--abilities');
+					const btnStats = document.querySelector('.btn--stats');
+					const btnMoves = document.querySelector('.btn--moves');
+
+					data.addEventListener('click', (e) => {
+						const active = e.target.closest('button');
+						btnAbilities.classList.add('data__btn--active');
+
+						if (active?.dataset?.accion === 'abilities') {
+							e.preventDefault();
+							abilities.classList.remove('data--disabled');
+							stats.classList.add('data--disabled');
+							moves.classList.add('data--disabled');
+							btnAbilities.classList.add('data__btn--active');
+							btnStats.classList.remove('data__btn--active');
+							btnMoves.classList.remove('data__btn--active');
+						}
+
+						if (active?.dataset?.accion === 'stats') {
+							e.preventDefault();
+							abilities.classList.add('data--disabled');
+							stats.classList.remove('data--disabled');
+							moves.classList.add('data--disabled');
+							btnAbilities.classList.remove('data__btn--active');
+							btnStats.classList.add('data__btn--active');
+							btnMoves.classList.remove('data__btn--active');
+						}
+
+						if (active?.dataset?.accion === 'moves') {
+							e.preventDefault();
+							abilities.classList.add('data--disabled');
+							stats.classList.add('data--disabled');
+							moves.classList.remove('data--disabled');
+							btnAbilities.classList.remove('data__btn--active');
+							btnStats.classList.remove('data__btn--active');
+							btnMoves.classList.add('data__btn--active');
+						}
+					});
 				}
 			});
 		});
@@ -129,6 +176,50 @@ const Pokedex = (function () {
 				const datosHTML = resultado.cargarDatos();
 				const dataContent = document.querySelector('.data__content');
 				dataContent.innerHTML = datosHTML;
+
+				const data = document.querySelector('.data__card');
+				const abilities = document.querySelector('.data__abilities');
+				const stats = document.querySelector('.data__stats');
+				const moves = document.querySelector('.data__moves');
+
+				const btnAbilities = document.querySelector('.btn--abilities');
+				const btnStats = document.querySelector('.btn--stats');
+				const btnMoves = document.querySelector('.btn--moves');
+
+				data.addEventListener('click', (e) => {
+					const active = e.target.closest('button');
+					btnAbilities.classList.add('data__btn--active');
+
+					if (active?.dataset?.accion === 'abilities') {
+						e.preventDefault();
+						abilities.classList.remove('data--disabled');
+						stats.classList.add('data--disabled');
+						moves.classList.add('data--disabled');
+						btnAbilities.classList.add('data__btn--active');
+						btnStats.classList.remove('data__btn--active');
+						btnMoves.classList.remove('data__btn--active');
+					}
+
+					if (active?.dataset?.accion === 'stats') {
+						e.preventDefault();
+						abilities.classList.add('data--disabled');
+						stats.classList.remove('data--disabled');
+						moves.classList.add('data--disabled');
+						btnAbilities.classList.remove('data__btn--active');
+						btnStats.classList.add('data__btn--active');
+						btnMoves.classList.remove('data__btn--active');
+					}
+
+					if (active?.dataset?.accion === 'moves') {
+						e.preventDefault();
+						abilities.classList.add('data--disabled');
+						stats.classList.add('data--disabled');
+						moves.classList.remove('data--disabled');
+						btnAbilities.classList.remove('data__btn--active');
+						btnStats.classList.remove('data__btn--active');
+						btnMoves.classList.add('data__btn--active');
+					}
+				});
 			}
 		});
 	};

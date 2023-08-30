@@ -8,11 +8,6 @@ const boxes = document.querySelector('.boxes');
 const header = document.querySelector('.header__search--pokemon');
 const mobile = document.querySelector('.mobile');
 
-document.querySelector('.data__container--btn');
-document.querySelector('.data__abilities');
-document.querySelector('.data__stats');
-document.querySelector('.data__moves');
-
 const activeOpctions = () => {
 	navbar.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
@@ -98,9 +93,9 @@ const dataPokemon = () => {
 	});
 
 	datos.addEventListener('click', (e) => {
-		e.preventDefault();
+		const link = e.target.closest('button');
 
-		if (e.target.closest('button')) {
+		if (link?.dataset?.accion === 'close') {
 			datos.classList.remove('data--active');
 		}
 	});
@@ -189,7 +184,9 @@ function Pokemon(
 	defensa,
 	ataqueEspecial,
 	defensaEspecial,
-	velocidad
+	velocidad,
+	movimientos,
+	habilidades
 ) {
 	return {
 		urlImagen: urlImagen,
@@ -205,6 +202,8 @@ function Pokemon(
 		ataqueEspecial: ataqueEspecial,
 		defensaEspecial: defensaEspecial,
 		velocidad: velocidad,
+		movimientos: movimientos,
+		habilidades: habilidades,
 		obtenerDatos: function () {
 			const typeSpans = this.tipos
 				.map((type) => `<span class="box__type">${type}</span>`)
@@ -244,6 +243,15 @@ function Pokemon(
 		},
 		cargarDatos: function () {
 			const data = document.querySelector('.data__content');
+
+			const moves = this.movimientos
+				.map((move) => `<span class="data__move" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">${move}</span>`)
+				.join('');
+
+			const abilities = this.habilidades
+				.map((ability) => `<span class="data__move" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">${ability}</span>`)
+				.join('');
+
 			data.style.background = background(this.tipo);
 			let SumaTotal =
 				this.ps +
@@ -261,46 +269,59 @@ function Pokemon(
 						</div>
 
 						<div class="data__pokemon">
-							<h1 class="data__name">${this.nombre}</h1>
-							<div class="data__stats">
-								<span class="data__stats--title">Estadisticas base</span>
+                        <h1 class="data__name">${this.nombre}</h1>
 
-								<div class="data__content--stast">
-									<div class="data__container--stats">
-										<span class="data__container--span">Ps</span>
-										<span class="data__container--span">Ataque</span>
-										<span class="data__container--span">Defensa</span>
-										<span class="data__container--span">At. Especial</span>
-										<span class="data__container--span">Def. Especial</span>
-										<span class="data__container--span">Velocidad</span>
-										<span class="data__container--span">Suma Total</span>
-									</div>
+                        <div class="data__container--btn">
+                            <button class="data__btn btn--abilities" data-accion="abilities" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Abilities</button>
+                            <button class="data__btn btn--stats" data-accion="stats" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Stast</button>
+                            <button class="data__btn btn--moves" data-accion="moves" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Moves</button>
+                        </div>
 
-									<div class="data__container--stats">
-										<span class="data__container--number">${this.ps}</span>
-										<span class="data__container--number">${this.ataque}</span>
-										<span class="data__container--number">${this.defensa}</span>
-										<span class="data__container--number">${this.ataqueEspecial}</span>
-										<span class="data__container--number">${this.defensaEspecial}</span>
-										<span class="data__container--number">${this.velocidad}</span>
-										<span class="data__container--number">${SumaTotal}</span>
-									</div>
-
-									<div class="data__container--stats">
-										<progress class="data__progress" value="${this.ps}" max="200"></progress>
-										<progress class="data__progress" value="${this.ataque}" max="200"></progress>
-										<progress class="data__progress" value="${this.defensa}" max="200"></progress>
-										<progress class="data__progress" value="${this.ataqueEspecial}" max="200"></progress>
-										<progress class="data__progress" value="${this.defensaEspecial}" max="200"></progress>
-										<progress class="data__progress" value="${this.velocidad}" max="500"></progress>
-										<progress class="data__progress" value="${SumaTotal}" max="1000"></progress>
-									</div>
-								</div>
-							</div>
+                        <div class="data__abilities">
+						${abilities}
 						</div>
+
+                        <div class="data__stats data--disabled">
+                            <span class="data__stats--title">Estadisticas base</span>
+
+                            <div class="data__content--stast">
+                                <div class="data__container--stats">
+                                    <span class="data__container--span">Ps</span>
+                                    <span class="data__container--span">Ataque</span>
+                                    <span class="data__container--span">Defensa</span>
+                                    <span class="data__container--span">Velocidad</span>
+                                    <span class="data__container--span">At. Especial</span>
+                                    <span class="data__container--span">Def. Especial</span>
+                                    <span class="data__container--span">Suma Total</span>
+                                </div>
+
+                                <div class="data__container--stats">
+									<span class="data__container--number">${this.ps}</span>
+									<span class="data__container--number">${this.ataque}</span>
+									<span class="data__container--number">${this.defensa}</span>
+									<span class="data__container--number">${this.ataqueEspecial}</span>
+									<span class="data__container--number">${this.defensaEspecial}</span>
+									<span class="data__container--number">${this.velocidad}</span>
+									<span class="data__container--number">${SumaTotal}</span>
+                                </div>
+
+                                <div class="data__container--stats">
+									<progress class="data__progress" value="${this.ps}" max="200"></progress>
+									<progress class="data__progress" value="${this.ataque}" max="200"></progress>
+									<progress class="data__progress" value="${this.defensa}" max="200"></progress>
+									<progress class="data__progress" value="${this.ataqueEspecial}" max="200"></progress>
+									<progress class="data__progress" value="${this.defensaEspecial}" max="200"></progress>
+									<progress class="data__progress" value="${this.velocidad}" max="500"></progress>
+									<progress class="data__progress" value="${SumaTotal}" max="1000"></progress>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="data__moves data--disabled">${moves}</div>
+                    </div>
 					</div>
 
-					<button class="data__close">
+					<button class="data__close" data-accion="close">
 						<img src="Img/pokemon_moltres_icon-icons.com_67518.png" alt="">
 					</button>`;
 
@@ -318,6 +339,8 @@ const Pokedex = (function () {
 		const datos = await resultado.json();
 
 		const tipos = datos.types.map((typeData) => typeData.type.name);
+		const movimientos = datos.moves.map((moveData) => moveData.move.name);
+		const habilidades = datos.abilities.map((abi) => abi.ability.name);
 
 		return new Pokemon(
 			datos.sprites.other['official-artwork'].front_default,
@@ -332,7 +355,9 @@ const Pokedex = (function () {
 			datos.stats[2].base_stat,
 			datos.stats[3].base_stat,
 			datos.stats[4].base_stat,
-			datos.stats[5].base_stat
+			datos.stats[5].base_stat,
+			movimientos,
+			habilidades
 		);
 	};
 
@@ -421,6 +446,49 @@ const Pokedex = (function () {
 					const datosHTML = resultado.cargarDatos();
 					const dataContent = document.querySelector('.data__content');
 					dataContent.innerHTML = datosHTML;
+					const data = document.querySelector('.data__card');
+					const abilities = document.querySelector('.data__abilities');
+					const stats = document.querySelector('.data__stats');
+					const moves = document.querySelector('.data__moves');
+
+					const btnAbilities = document.querySelector('.btn--abilities');
+					const btnStats = document.querySelector('.btn--stats');
+					const btnMoves = document.querySelector('.btn--moves');
+
+					data.addEventListener('click', (e) => {
+						const active = e.target.closest('button');
+						btnAbilities.classList.add('data__btn--active');
+
+						if (active?.dataset?.accion === 'abilities') {
+							e.preventDefault();
+							abilities.classList.remove('data--disabled');
+							stats.classList.add('data--disabled');
+							moves.classList.add('data--disabled');
+							btnAbilities.classList.add('data__btn--active');
+							btnStats.classList.remove('data__btn--active');
+							btnMoves.classList.remove('data__btn--active');
+						}
+
+						if (active?.dataset?.accion === 'stats') {
+							e.preventDefault();
+							abilities.classList.add('data--disabled');
+							stats.classList.remove('data--disabled');
+							moves.classList.add('data--disabled');
+							btnAbilities.classList.remove('data__btn--active');
+							btnStats.classList.add('data__btn--active');
+							btnMoves.classList.remove('data__btn--active');
+						}
+
+						if (active?.dataset?.accion === 'moves') {
+							e.preventDefault();
+							abilities.classList.add('data--disabled');
+							stats.classList.add('data--disabled');
+							moves.classList.remove('data--disabled');
+							btnAbilities.classList.remove('data__btn--active');
+							btnStats.classList.remove('data__btn--active');
+							btnMoves.classList.add('data__btn--active');
+						}
+					});
 				}
 			});
 		});
@@ -438,6 +506,50 @@ const Pokedex = (function () {
 				const datosHTML = resultado.cargarDatos();
 				const dataContent = document.querySelector('.data__content');
 				dataContent.innerHTML = datosHTML;
+
+				const data = document.querySelector('.data__card');
+				const abilities = document.querySelector('.data__abilities');
+				const stats = document.querySelector('.data__stats');
+				const moves = document.querySelector('.data__moves');
+
+				const btnAbilities = document.querySelector('.btn--abilities');
+				const btnStats = document.querySelector('.btn--stats');
+				const btnMoves = document.querySelector('.btn--moves');
+
+				data.addEventListener('click', (e) => {
+					const active = e.target.closest('button');
+					btnAbilities.classList.add('data__btn--active');
+
+					if (active?.dataset?.accion === 'abilities') {
+						e.preventDefault();
+						abilities.classList.remove('data--disabled');
+						stats.classList.add('data--disabled');
+						moves.classList.add('data--disabled');
+						btnAbilities.classList.add('data__btn--active');
+						btnStats.classList.remove('data__btn--active');
+						btnMoves.classList.remove('data__btn--active');
+					}
+
+					if (active?.dataset?.accion === 'stats') {
+						e.preventDefault();
+						abilities.classList.add('data--disabled');
+						stats.classList.remove('data--disabled');
+						moves.classList.add('data--disabled');
+						btnAbilities.classList.remove('data__btn--active');
+						btnStats.classList.add('data__btn--active');
+						btnMoves.classList.remove('data__btn--active');
+					}
+
+					if (active?.dataset?.accion === 'moves') {
+						e.preventDefault();
+						abilities.classList.add('data--disabled');
+						stats.classList.add('data--disabled');
+						moves.classList.remove('data--disabled');
+						btnAbilities.classList.remove('data__btn--active');
+						btnStats.classList.remove('data__btn--active');
+						btnMoves.classList.add('data__btn--active');
+					}
+				});
 			}
 		});
 	};
@@ -463,5 +575,4 @@ activeOpctions();
 dataPokemon();
 loaderData();
 mobileActive();
-// activeData();
 //# sourceMappingURL=bundle.js.map

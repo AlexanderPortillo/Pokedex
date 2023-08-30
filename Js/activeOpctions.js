@@ -1,3 +1,4 @@
+// !Creacion de constantes para el llamado de clases de la pokedex
 const navbar = document.querySelector('.nav');
 const search = document.querySelector('.header__search');
 const itemOne = document.querySelector('.nav__li--one');
@@ -12,10 +13,12 @@ const stats = document.querySelector('.data__stats');
 const moves = document.querySelector('.data__moves');
 
 const activeOpctions = () => {
+		// !Activa las opciones de la pokedex
 	navbar.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
 		const link = e.target.closest('a');
 
+		// !Activamos el retiro del menu para movil
 		if (btn?.dataset?.accion === 'menu') {
 			mobile.classList.remove('mobile--disabled');
 		}
@@ -42,6 +45,7 @@ const activeOpctions = () => {
 	});
 };
 
+ // !Activamos la forma movil de la pokedex
 const mobileActive = () => {
 	mobile.addEventListener('click', (e) => {
 		const btn = e.target.closest('button');
@@ -85,6 +89,7 @@ const mobileActive = () => {
 	});
 };
 
+//! Activamos la seleccion de que apartado mostrar en la tarjeta de los pokemon 
 const activeData = () => {
 	data.addEventListener('click', (e) => {
 		const active = e.target.closest('button');

@@ -5,9 +5,11 @@ const Pokedex = (function () {
 	const busquedasRecientes = [];
 
 	const obtenerPokemon = async (id) => {
+		// !Busqueda de datos en la Api
 		const resultado = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 		const datos = await resultado.json();
 
+		// !Consigue el tipo de dato del pokemon
 		const tipos = datos.types.map((typeData) => typeData.type.name);
 
 		return new Pokemon(
@@ -27,6 +29,7 @@ const Pokedex = (function () {
 		);
 	};
 
+	// !Carga los 151 pokemon de la Podex haciendo un for que recorre los datos de cada pokemon
 	const cargarPokemon = async () => {
 		const loader = document.querySelector('.wrapper');
 
@@ -39,7 +42,7 @@ const Pokedex = (function () {
 			}
 		}
 
-		loader.style.display = 'none';
+		loader.style.display = 'none'; // !Cuando no aparece un dato existente
 	};
 
 	const dibujarPokedex = () => {
@@ -65,7 +68,8 @@ const Pokedex = (function () {
 				header.innerHTML = '';
 
 				let pokemonEncontrado = null;
-
+				
+				// !Busca a cada pokemon
 				busquedasRecientes.forEach((pokemon) => {
 					if (pokemon.id === id) {
 						pokemonEncontrado = pokemon;
@@ -98,6 +102,7 @@ const Pokedex = (function () {
 		const header = document.querySelector('.header__search--pokemon');
 		header.innerHTML = '';
 
+		// !Busca a cada pokemon
 		busquedasRecientes.forEach((pokemon) => {
 			const container = document.querySelector('.header__search--pokemon');
 			const popup = document.getElementById('data');

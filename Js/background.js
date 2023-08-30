@@ -1,3 +1,4 @@
+// !Ubicamos la seleccion de color para las tarjeta tanto principal y secundaria
 const background = (tipo) => {
 	let background;
 

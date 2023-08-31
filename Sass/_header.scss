@@ -1,3 +1,12 @@
+@keyframes aparecer {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 .header {
 	width: 100%;
 	display: flex;
@@ -21,6 +30,9 @@
 		border: 3px solid #fbca02;
 		box-shadow: 0 0 10px #306bb1;
 		transition: border 1s, box-shadow 1s;
+		animation: aparecer 1s ease;
+		animation-fill-mode: forwards;
+		opacity: 0;
 
 		&:focus-within {
 			border: 3px solid #306bb1;
@@ -56,7 +68,7 @@
 		border: none;
 		font-size: 1.2rem;
 		caret-color: #bb2525;
-		color: #0c356a;
+		color: #a7adb4;
 		background-color: transparent;
 	}
 

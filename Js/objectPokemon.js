@@ -36,8 +36,11 @@ export default function Pokemon(
 		velocidad: velocidad,
 		movimientos: movimientos,
 		habilidades: habilidades,
+		// !Metodos que nos permiten crear las tarjetas y la ventana de informacion
 		obtenerDatos: function () {
-			// !Traemos el tipo de pokemon
+			// !Utilizamos el metodo map para iterar a traves de un array. Donde por cada
+			// !elemento en ese array se esta creando un elemento en este caso un span.
+			// !Luego todos estos elementos se estan concatenando en una cadena usando el metodo join
 			const typeSpans = this.tipos
 				.map((type) => `<span class="box__type">${type}</span>`)
 				.join('');
@@ -79,11 +82,21 @@ export default function Pokemon(
 			const data = document.querySelector('.data__content');
 
 			const moves = this.movimientos
-				.map((move) => `<span class="data__move" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">${move}</span>`)
+				.map(
+					(move) =>
+						`<span class="data__move" style="background-color: ${background(
+							this.tipo
+						)}; box-shadow: 0 0 10px ${background(this.tipo)};">${move}</span>`
+				)
 				.join('');
 
 			const abilities = this.habilidades
-				.map((ability) => `<span class="data__move" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">${ability}</span>`)
+				.map(
+					(ability) =>
+						`<span class="data__move" style="background-color: ${background(
+							this.tipo
+						)}; box-shadow: 0 0 10px ${background(this.tipo)};">${ability}</span>`
+				)
 				.join('');
 
 			data.style.background = background(this.tipo);
@@ -95,11 +108,13 @@ export default function Pokemon(
 				this.defensaEspecial +
 				this.velocidad;
 
-			// !Se estructura la base de la tarjeta secundaria y muestra el contenido secundario de cada pokemon, ademas extraemos datos de la Api 
+			// !Se estructura la base de la tarjeta secundaria y muestra el contenido secundario de cada pokemon, ademas extraemos datos de la Api
 			const plantilla = `
 					<div class="data__card">
 						<div class="data__container">
-							<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${this.id}.gif"
+							<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${
+								this.id
+							}.gif"
 								alt="" class="data__img--pokemon">
 						</div>
 
@@ -107,9 +122,17 @@ export default function Pokemon(
                         <h1 class="data__name">${this.nombre}</h1>
 
                         <div class="data__container--btn">
-                            <button class="data__btn btn--abilities" data-accion="abilities" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Abilities</button>
-                            <button class="data__btn btn--stats" data-accion="stats" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Stast</button>
-                            <button class="data__btn btn--moves" data-accion="moves" style="background-color: ${background(this.tipo)}; box-shadow: 0 0 10px ${background(this.tipo)};">Moves</button>
+                            <button class="data__btn btn--abilities" data-accion="abilities" style="background-color: ${background(
+															this.tipo
+														)}; box-shadow: 0 0 10px ${background(
+				this.tipo
+			)};">Abilities</button>
+                            <button class="data__btn btn--stats" data-accion="stats" style="background-color: ${background(
+															this.tipo
+														)}; box-shadow: 0 0 10px ${background(this.tipo)};">Stast</button>
+                            <button class="data__btn btn--moves" data-accion="moves" style="background-color: ${background(
+															this.tipo
+														)}; box-shadow: 0 0 10px ${background(this.tipo)};">Moves</button>
                         </div>
 
                         <div class="data__abilities">
@@ -117,17 +140,17 @@ export default function Pokemon(
 						</div>
 
                         <div class="data__stats data--disabled">
-                            <span class="data__stats--title">Estadisticas base</span>
+                            <span class="data__stats--title">Stats</span>
 
                             <div class="data__content--stast">
                                 <div class="data__container--stats">
-                                    <span class="data__container--span">Ps</span>
-                                    <span class="data__container--span">Ataque</span>
-                                    <span class="data__container--span">Defensa</span>
-                                    <span class="data__container--span">Velocidad</span>
-                                    <span class="data__container--span">At. Especial</span>
-                                    <span class="data__container--span">Def. Especial</span>
-                                    <span class="data__container--span">Suma Total</span>
+                                    <span class="data__container--span">Hp</span>
+                                    <span class="data__container--span">Attack</span>
+                                    <span class="data__container--span">Defense</span>
+                                    <span class="data__container--span">Special attack</span>
+                                    <span class="data__container--span">Special defense</span>
+                                    <span class="data__container--span">Speed</span>
+                                    <span class="data__container--span">Total amount</span>
                                 </div>
 
                                 <div class="data__container--stats">

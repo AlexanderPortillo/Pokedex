@@ -407,7 +407,7 @@ const Pokedex = (function () {
 		// !Activamos el loader para que se muestre mientras los pokemons se estan cargandos
 		loader.style.display = 'block';
 
-		for (let i = 1; i <= 1; i++) {
+		for (let i = 1; i <= 151; i++) {
 			// !Llamamos a la funcion obtenerPokemon y le pasamos un valor el cual el for
 			// !seguira aumentando hasta llegar a lo establecido, este valor seria el id
 			// !del pokemon el cual se encuentra en la api, de ser encontrado este se mandara a llamar
